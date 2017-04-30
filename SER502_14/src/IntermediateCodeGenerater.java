@@ -182,6 +182,29 @@ public class IntermediateCodeGenerater {
 
 						intermediate_code.add("endwhile");
 					}
+					else if (instructions[i].trim().equals("assignment")){
+						i++;
+						String var = instructions[i].split(" ")[1];
+						i++;
+						String expression = "";
+						while (instructions[i].split(" ").length > 1 && 
+							   instructions[i].split(" ")[0].equals("expression")){
+							
+							expression += (instructions[i].split(" ")[1] + " " +
+									       instructions[i].split(" ")[2] + " ");
+							i++;
+						}
+						expression = expression.substring(0,expression.length()-2);
+						intermediate_code.add(var + " = "+expression );
+						
+						//i-- because we have already reached to next  statement and i++ in for will skip 
+						// this statement
+						i--;
+					}
+					else if (instructions[i].split(" ").length > 1 &&
+							 instructions[i].trim().split(" ")[0].equals("exit_skip")){
+						intermediate_code.add(instructions[i].trim().split(" ")[1] );
+					}
 
 				}
 
