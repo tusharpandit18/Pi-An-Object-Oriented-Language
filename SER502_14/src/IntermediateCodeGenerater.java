@@ -3,39 +3,39 @@ import java.util.HashMap;
 
 
 public class IntermediateCodeGenerater {
-	
+
 	static HashMap<String,String[]> symbol_table = new HashMap<String,String[]>();
 	public static void main(String[] args) {
-	
+
 	}
 	public ArrayList<String> generate(String parseTree){
 	//String parseTree = "(program (statement (declaration (declare number vara .)) (declaration (declare_and_assign (number_declare_assign number (number_assign varb = (expression 4 + (expression 5 + (expression a .))))))) (declaration (declare boolean c .)) (declaration (declare_and_assign (boolean_declare_assign boolean (bool_assign d = true .)))) (declaration (declare string e .)) (declaration (declare_and_assign (string_declare_assign string (string_assign srr = \"Hello\" .)))) (print_statement (print_var print a .)) (print_statement (print_var print b .)) (print_statement (print_var print c .))))";
 	//String parseTree = Runner.parse_tree;
 	// Split the tree and store in an array
-	String instructions[] = parseTree.split("[()]+"); 
+	String instructions[] = parseTree.split("[()]+");
 	ArrayList<String> intermediate_code = new ArrayList<String>();
-	
+
 	// Key - variable name
 	// array : index-0 - type, index-1 - value, index -3 attribute
 	// value will be assigned in runtime
-	
-	
+
+
 	for (String i:instructions){
 		System.out.println(i);
 	}
-	
+
 	for (int  i = 0; i< instructions.length ; i++){
-				
+
 		// Ignore empty rows
 		if (! instructions[i].equals("")){
 			// Write functions for each operation
-			
+
 			if (instructions[i].trim().equals("declaration")){
 				//Ignore empty cells if any
 				while (instructions[i] == "")i++;
 				// goto next valid statement and check if it is declare or declare and assign
 				i++;
-								
+
 				if (instructions[i].split(" ")[0].equals("declare")){
 					String []row = instructions[i].split(" ");
 					String key = row[2];
@@ -44,7 +44,7 @@ public class IntermediateCodeGenerater {
 					//value[1] = "";
 					// enter in intermediate code
 					intermediate_code.add(row[0]+ " " + row[2]);
-					
+
 					// enter in symbol table
 					if (symbol_table.containsKey(key)){
 						System.out.println("Exception - duplicate variable declaration");
@@ -66,7 +66,7 @@ public class IntermediateCodeGenerater {
 						String key = var;
 						String value[] = new String[3];
 						value[0] = "number";
-						
+
 						//add to symbol table
 						if (symbol_table.containsKey(key)){
 							System.out.println("Exception - duplicate variable declaration");
@@ -74,14 +74,14 @@ public class IntermediateCodeGenerater {
 						else {
 							symbol_table.put(key,value);
 						}
-						
+
 						// add intermediate code entry
 						intermediate_code.add("declare" + " " + var);
 						i++;
 						String rs = "";
 						while (instructions[i].length()> 1 && instructions[i].split(" ")[0].equals("expression")){
 							// evaluate the expressions and write it to rs
-							
+
 							rs += instructions[i].split(" ")[1]+" "+instructions[i].split(" ")[2]+" ";
 							i++;
 						}
@@ -91,15 +91,15 @@ public class IntermediateCodeGenerater {
 					}
 					else if (instructions[i].split(" ")[0].equals("boolean_declare_assign")){
 						i++;
-						
+
 						String[] row = instructions[i].split(" ");
-						
+
 						//Add declaration
 						intermediate_code.add("declare" + " " + row[1]);
 						String key = row[1];
 						String value[] = new String[3];
 						value[0] = "boolean";
-						
+
 						//add to symbol table
 						if (symbol_table.containsKey(key)){
 							System.out.println("Exception - duplicate variable declaration");
@@ -114,11 +114,11 @@ public class IntermediateCodeGenerater {
 						i++;
 						String[] row = instructions[i].split(" ");
 						String line_input = instructions[i].split("\"")[1];
-						
+
 						String key = row[1];
 						String value[] = new String[3];
 						value[0] = "string";
-						
+
 						//add to symbol table
 						if (symbol_table.containsKey(key)){
 							System.out.println("Exception - duplicate variable declaration");
@@ -139,7 +139,7 @@ public class IntermediateCodeGenerater {
 						String []print = instructions[i].split(" ");
 
 						// print variable
-						if (print[0].trim().equals("print_var")){					
+						if (print[0].trim().equals("print_var")){
 							intermediate_code.add(print[1] + "_var " + print[2]);
 						}
 						// print a statement
@@ -154,8 +154,37 @@ public class IntermediateCodeGenerater {
 						}
 
 					}
+					else if (instructions[i].trim().split(" ")[0].equals("if_statement")){
+
+						String keyword_if = instructions[i].trim().split(" ")[1];
+						i++;
+						String []condition = instructions[i].split(" ");
+						intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
+					}
+					else if (instructions[i].trim().split(" ")[0].equals("else")){
+						intermediate_code.add("else");
+					}
+					else if (instructions[i].trim().split(" ").length >  1 &&
+							(instructions[i].trim().split(" ")[1].equals("endif")||
+							 instructions[i].trim().split(" ")[0].equals("endif"))){
+						intermediate_code.add("endif");
+					}
+					else if (instructions[i].trim().split(" ")[0].equals("loop_statement")){
+
+						String keyword_if = instructions[i].trim().split(" ")[1];
+						i++;
+						String []condition = instructions[i].split(" ");
+						intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
+					}
+					else if (instructions[i].trim().split(" ").length >  1 &&
+							(instructions[i].trim().split(" ")[1].equals("endwhile")||
+							 instructions[i].trim().split(" ")[0].equals("endwhile"))){
+
+						intermediate_code.add("endwhile");
+					}
+
 				}
-				
+
 			}
 		}
 	}
@@ -171,5 +200,5 @@ public class IntermediateCodeGenerater {
 //		//System.out.println("Values: " + entry.getValue()[0] + " " + entry.getValue()[1]);
 //	}
 	return intermediate_code;
-  }	
+  }
 }
