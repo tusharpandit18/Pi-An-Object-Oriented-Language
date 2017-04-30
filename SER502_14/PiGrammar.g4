@@ -37,13 +37,13 @@ expression : (   VAR K_DOT
 			   | DIGIT AR_OP expression
 			  ) ;
 
-if_statement : K_IF condition K_COLON (statement)* ( K_ENDIF | K_ELSE (statement)* | K_ELSE if_statement )* ;
+if_statement : K_IF condition K_COLON (statement)* ( K_ENDIF | K_ELSE K_COLON (statement)* | K_ELSE if_statement )* ;
 
 condition : (   VAR COMP_OP DIGIT 
 			  | VAR COMP_OP VAR 
 			);
 
-loop_statement : K_WHILE condition K_COLON (statement)* K_ENDWHILE ;
+loop_statement : K_WHILE condition K_COLON (statement)* K_ENDWHILE K_DOT;
 
 declaration : (   declare
 	            | declare_and_assign
