@@ -19,7 +19,7 @@ public class IntermediateCodeGenerater {
 	// array : index-0 - type, index-1 - value, index -3 attribute
 	// value will be assigned in runtime
 
-
+	
 	for (String i:instructions){
 		System.out.println(i);
 	}
@@ -129,85 +129,86 @@ public class IntermediateCodeGenerater {
 						// add to intermediate code
 						intermediate_code.add(row[1]+" "+row[2]+" \""+ line_input+"\"");
 					}
-					else if (instructions[i].trim().equals("print_statement")){
-						//Ignore empty cells
-						while (instructions[i] == " ")i++;
-						// goto next valid statement and check if it is declare or declare and assign
-						i++;
-						// print statement will be of 3 types, variable, value or string
-						// split this string and check type of print statement
-						String []print = instructions[i].split(" ");
-
-						// print variable
-						if (print[0].trim().equals("print_var")){
-							intermediate_code.add(print[1] + "_var " + print[2]);
-						}
-						// print a statement
-						else if (print[0].trim().equals("print_num")){
-							intermediate_code.add(print[1] + "_num " + print[2]);
-						}
-						else if (print[0].trim().equals("print_line")){
-							String []line = instructions[i].split("\"");
-							String quote_to_print = "\"" + line[1]+ "\"";
-
-							intermediate_code.add(print[1] + "_line " +  quote_to_print);
-						}
-
-					}
-					else if (instructions[i].trim().split(" ")[0].equals("if_statement")){
-
-						String keyword_if = instructions[i].trim().split(" ")[1];
-						i++;
-						String []condition = instructions[i].split(" ");
-						intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
-					}
-					else if (instructions[i].trim().split(" ")[0].equals("else")){
-						intermediate_code.add("else");
-					}
-					else if (instructions[i].trim().split(" ").length >  1 &&
-							(instructions[i].trim().split(" ")[1].equals("endif")||
-							 instructions[i].trim().split(" ")[0].equals("endif"))){
-						intermediate_code.add("endif");
-					}
-					else if (instructions[i].trim().split(" ")[0].equals("loop_statement")){
-
-						String keyword_if = instructions[i].trim().split(" ")[1];
-						i++;
-						String []condition = instructions[i].split(" ");
-						intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
-					}
-					else if (instructions[i].trim().split(" ").length >  1 &&
-							(instructions[i].trim().split(" ")[1].equals("endwhile")||
-							 instructions[i].trim().split(" ")[0].equals("endwhile"))){
-
-						intermediate_code.add("endwhile");
-					}
-					else if (instructions[i].trim().equals("assignment")){
-						i++;
-						String var = instructions[i].split(" ")[1];
-						i++;
-						String expression = "";
-						while (instructions[i].split(" ").length > 1 && 
-							   instructions[i].split(" ")[0].equals("expression")){
-							
-							expression += (instructions[i].split(" ")[1] + " " +
-									       instructions[i].split(" ")[2] + " ");
-							i++;
-						}
-						expression = expression.substring(0,expression.length()-2);
-						intermediate_code.add(var + " = "+expression );
-						
-						//i-- because we have already reached to next  statement and i++ in for will skip 
-						// this statement
-						i--;
-					}
-					else if (instructions[i].split(" ").length > 1 &&
-							 instructions[i].trim().split(" ")[0].equals("exit_skip")){
-						intermediate_code.add(instructions[i].trim().split(" ")[1] );
-					}
-
 				}
 
+			}
+			else if (instructions[i].trim().equals("print_statement")){
+				//Ignore empty cells
+				while (instructions[i] == " ")i++;
+				// goto next valid statement and check if it is declare or declare and assign
+				i++;
+				// print statement will be of 3 types, variable, value or string
+				// split this string and check type of print statement
+				String []print = instructions[i].split(" ");
+
+				// print variable
+				if (print[0].trim().equals("print_var")){
+					intermediate_code.add(print[1] + "_var " + print[2]);
+				}
+				// print a statement
+				else if (print[0].trim().equals("print_num")){
+					intermediate_code.add(print[1] + "_num " + print[2]);
+				}
+				else if (print[0].trim().equals("print_line")){
+					String []line = instructions[i].split("\"");
+					String quote_to_print = "\"" + line[1]+ "\"";
+
+					intermediate_code.add(print[1] + "_line " +  quote_to_print);
+				}
+
+			}
+			else if (instructions[i].trim().split(" ")[0].equals("if_statement")){
+
+				String keyword_if = instructions[i].trim().split(" ")[1];
+				i++;
+				String []condition = instructions[i].split(" ");
+				intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
+			}
+			else if (instructions[i].trim().split(" ")[0].equals("else")){
+				intermediate_code.add("else");
+			}
+			else if (instructions[i].trim().split(" ").length >  1 &&
+					(instructions[i].trim().split(" ")[1].equals("endif")||
+					 instructions[i].trim().split(" ")[0].equals("endif"))){
+				intermediate_code.add("endif");
+			}
+			else if (instructions[i].trim().split(" ")[0].equals("loop_statement")){
+
+				String keyword_if = instructions[i].trim().split(" ")[1];
+				i++;
+				String []condition = instructions[i].split(" ");
+				intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
+			}
+			else if (instructions[i].trim().split(" ").length >  1 &&
+					(instructions[i].trim().split(" ")[1].equals("endwhile")||
+					 instructions[i].trim().split(" ")[0].equals("endwhile"))){
+
+				intermediate_code.add("endwhile");
+			}
+
+
+			else if (instructions[i].trim().equals("assignment")){
+				i++;
+				String var = instructions[i].split(" ")[1];
+				i++;
+				String expression = "";
+				while (instructions[i].split(" ").length > 1 &&
+					   instructions[i].split(" ")[0].equals("expression")){
+
+					expression += (instructions[i].split(" ")[1] + " " +
+							       instructions[i].split(" ")[2] + " ");
+					i++;
+				}
+				expression = expression.substring(0,expression.length()-2);
+				intermediate_code.add(var + " = "+expression );
+
+				//i-- because we have already reached to next  statement and i++ in for will skip
+				// this statement
+				i--;
+			}
+			else if (instructions[i].split(" ").length > 1 &&
+					 instructions[i].trim().split(" ")[0].equals("exit_skip")){
+				intermediate_code.add(instructions[i].trim().split(" ")[1] );
 			}
 		}
 	}
