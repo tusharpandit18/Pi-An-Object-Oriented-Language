@@ -1,0 +1,4 @@
+number a = 3.
+number b = 2.
+number c = a * b.
+print c.

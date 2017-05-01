@@ -1,0 +1,9 @@
+number n = 5.
+number mult = 1.
+
+while n GT 0:
+	mult = mult * n.
+	n = n-1.
+endwhile.
+print "factorial is".
+print mult.
