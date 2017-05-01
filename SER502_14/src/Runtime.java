@@ -428,7 +428,7 @@ public class Runtime {
 		}
 	}
 	
-	public boolean evaluate(String lhs, String operator, String rhs, HashMap<String,String[]> symbol_table){
+public boolean evaluate(String lhs, String operator, String rhs, HashMap<String,String[]> symbol_table){
 		
 		if (operator.equals("EQ")){
 			// if both sides number
@@ -438,10 +438,10 @@ public class Runtime {
 			// if lhs is number and rhs is variable
 			else if (!lhs.matches(".*[^0-9].*")){
 				// check if rhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(rhs)){
+				if (symbol_table.containsKey(rhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String rhs_val = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+					String type =  symbol_table.get(rhs)[0];
+					String rhs_val = symbol_table.get(rhs)[1];
 					double op2 = 0.0;
 					// convert the rhs based on type
 					// since lhs is a number , check only for number type
@@ -458,10 +458,10 @@ public class Runtime {
 			// if rhs is number and lhs is variable
 			else if (!rhs.matches(".*[^0-9].*")){
 				// check if lhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs)){
+				if (symbol_table.containsKey(lhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String lhs_val = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
+					String type =  symbol_table.get(lhs)[0];
+					String lhs_val = symbol_table.get(lhs)[1];
 					double op1 = 0.0;
 					// convert the lhs based on type
 					// since lhs is a number , check only for number type
@@ -478,12 +478,12 @@ public class Runtime {
 			// both string
 			else {
 				//check if variable is declared
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs) &&
-				    IntermediateCodeGenerator.symbol_table.containsKey(rhs)	){
-					String type1 =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String val1 = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
-					String type2 =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String val2 = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+				if (symbol_table.containsKey(lhs) &&
+				    symbol_table.containsKey(rhs)	){
+					String type1 =  symbol_table.get(lhs)[0];
+					String val1 = symbol_table.get(lhs)[1];
+					String type2 =  symbol_table.get(rhs)[0];
+					String val2 = symbol_table.get(rhs)[1];
 					
 					// check only if types are similar
 					if ((type1.equals("number")&& type2.equals("number"))){
@@ -516,10 +516,10 @@ public class Runtime {
 			// if lhs is number and rhs is variable
 			else if (!lhs.matches(".*[^0-9].*")){
 				// check if rhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(rhs)){
+				if (symbol_table.containsKey(rhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String rhs_val = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+					String type =  symbol_table.get(rhs)[0];
+					String rhs_val = symbol_table.get(rhs)[1];
 					double op2 = 0.0;
 					// convert the rhs based on type
 					// since lhs is a number , check only for number type
@@ -536,10 +536,10 @@ public class Runtime {
 			// if rhs is number and lhs is variable
 			else if (!rhs.matches(".*[^0-9].*")){
 				// check if lhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs)){
+				if (symbol_table.containsKey(lhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String lhs_val = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
+					String type =  symbol_table.get(lhs)[0];
+					String lhs_val = symbol_table.get(lhs)[1];
 					double op1 = 0.0;
 					// convert the lhs based on type
 					// since lhs is a number , check only for number type
@@ -556,12 +556,12 @@ public class Runtime {
 			// both string
 			else {
 				//check if variable is declared
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs) &&
-				    IntermediateCodeGenerator.symbol_table.containsKey(rhs)	){
-					String type1 =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String val1 = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
-					String type2 =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String val2 = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+				if (symbol_table.containsKey(lhs) &&
+				    symbol_table.containsKey(rhs)	){
+					String type1 =  symbol_table.get(lhs)[0];
+					String val1 = symbol_table.get(lhs)[1];
+					String type2 =  symbol_table.get(rhs)[0];
+					String val2 = symbol_table.get(rhs)[1];
 					
 					// check only if types are similar
 					if ((type1.equals("number")&& type2.equals("number"))){
@@ -588,10 +588,10 @@ public class Runtime {
 			// if lhs is number and rhs is variable
 			else if (!lhs.matches(".*[^0-9].*")){
 				// check if rhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(rhs)){
+				if (symbol_table.containsKey(rhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String rhs_val = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+					String type =  symbol_table.get(rhs)[0];
+					String rhs_val = symbol_table.get(rhs)[1];
 					double op2 = 0.0;
 					// convert the rhs based on type
 					// since lhs is a number , check only for number type
@@ -608,10 +608,10 @@ public class Runtime {
 			// if rhs is number and lhs is variable
 			else if (!rhs.matches(".*[^0-9].*")){
 				// check if lhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs)){
+				if (symbol_table.containsKey(lhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String lhs_val = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
+					String type =  symbol_table.get(lhs)[0];
+					String lhs_val = symbol_table.get(lhs)[1];
 					double op1 = 0.0;
 					// convert the lhs based on type
 					// since lhs is a number , check only for number type
@@ -628,12 +628,12 @@ public class Runtime {
 			// both string
 			else {
 				//check if variable is declared
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs) &&
-				    IntermediateCodeGenerator.symbol_table.containsKey(rhs)	){
-					String type1 =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String val1 = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
-					String type2 =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String val2 = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+				if (symbol_table.containsKey(lhs) &&
+				    symbol_table.containsKey(rhs)	){
+					String type1 =  symbol_table.get(lhs)[0];
+					String val1 = symbol_table.get(lhs)[1];
+					String type2 =  symbol_table.get(rhs)[0];
+					String val2 = symbol_table.get(rhs)[1];
 					
 					// check only if types are similar
 					if ((type1.equals("number")&& type2.equals("number"))){
@@ -660,10 +660,10 @@ public class Runtime {
 			// if lhs is number and rhs is variable
 			else if (!lhs.matches(".*[^0-9].*")){
 				// check if rhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(rhs)){
+				if (symbol_table.containsKey(rhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String rhs_val = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+					String type =  symbol_table.get(rhs)[0];
+					String rhs_val = symbol_table.get(rhs)[1];
 					double op2 = 0.0;
 					// convert the rhs based on type
 					// since lhs is a number , check only for number type
@@ -680,10 +680,10 @@ public class Runtime {
 			// if rhs is number and lhs is variable
 			else if (!rhs.matches(".*[^0-9].*")){
 				// check if lhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs)){
+				if (symbol_table.containsKey(lhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String lhs_val = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
+					String type =  symbol_table.get(lhs)[0];
+					String lhs_val = symbol_table.get(lhs)[1];
 					double op1 = 0.0;
 					// convert the lhs based on type
 					// since lhs is a number , check only for number type
@@ -700,12 +700,12 @@ public class Runtime {
 			// both string
 			else {
 				//check if variable is declared
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs) &&
-				    IntermediateCodeGenerator.symbol_table.containsKey(rhs)	){
-					String type1 =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String val1 = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
-					String type2 =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String val2 = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+				if (symbol_table.containsKey(lhs) &&
+				    symbol_table.containsKey(rhs)	){
+					String type1 =  symbol_table.get(lhs)[0];
+					String val1 = symbol_table.get(lhs)[1];
+					String type2 =  symbol_table.get(rhs)[0];
+					String val2 = symbol_table.get(rhs)[1];
 					
 					// check only if types are similar
 					if ((type1.equals("number")&& type2.equals("number"))){
@@ -732,10 +732,10 @@ public class Runtime {
 			// if lhs is number and rhs is variable
 			else if (!lhs.matches(".*[^0-9].*")){
 				// check if rhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(rhs)){
+				if (symbol_table.containsKey(rhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String rhs_val = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+					String type =  symbol_table.get(rhs)[0];
+					String rhs_val = symbol_table.get(rhs)[1];
 					double op2 = 0.0;
 					// convert the rhs based on type
 					// since lhs is a number , check only for number type
@@ -752,10 +752,10 @@ public class Runtime {
 			// if rhs is number and lhs is variable
 			else if (!rhs.matches(".*[^0-9].*")){
 				// check if lhs is declared and initialized
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs)){
+				if (symbol_table.containsKey(lhs)){
 					// variable is declared, get its value from symbol table
-					String type =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String lhs_val = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
+					String type =  symbol_table.get(lhs)[0];
+					String lhs_val = symbol_table.get(lhs)[1];
 					double op1 = 0.0;
 					// convert the lhs based on type
 					// since lhs is a number , check only for number type
@@ -772,12 +772,12 @@ public class Runtime {
 			// both string
 			else {
 				//check if variable is declared
-				if (IntermediateCodeGenerator.symbol_table.containsKey(lhs) &&
-				    IntermediateCodeGenerator.symbol_table.containsKey(rhs)	){
-					String type1 =  IntermediateCodeGenerator.symbol_table.get(lhs)[0];
-					String val1 = IntermediateCodeGenerator.symbol_table.get(lhs)[1];
-					String type2 =  IntermediateCodeGenerator.symbol_table.get(rhs)[0];
-					String val2 = IntermediateCodeGenerator.symbol_table.get(rhs)[1];
+				if (symbol_table.containsKey(lhs) &&
+				    symbol_table.containsKey(rhs)	){
+					String type1 =  symbol_table.get(lhs)[0];
+					String val1 = symbol_table.get(lhs)[1];
+					String type2 =  symbol_table.get(rhs)[0];
+					String val2 = symbol_table.get(rhs)[1];
 					
 					// check only if types are similar
 					if ((type1.equals("number")&& type2.equals("number"))){
