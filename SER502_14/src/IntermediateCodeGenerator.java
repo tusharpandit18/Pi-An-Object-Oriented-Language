@@ -235,6 +235,54 @@ public class IntermediateCodeGenerator {
 
 				intermediate_code.add("EDLP");
 			}
+			else if (instructions[i].trim().equals("assignment")){
+				i++;
+				String var = instructions[i].split(" ")[1];
+				i++;
+				String expression = "";
+				
+				Stack<String> operatorSt = new Stack<String>();
+				Stack<String> operandSt = new Stack<String>();
+				
+				while (instructions[i].length()> 1 && instructions[i].split(" ")[0].equals("expression")){
+					// evaluate the expressions and write it to rs
+					operatorSt.push(instructions[i].split(" ")[2]);
+					operandSt.push(instructions[i].split(" ")[1]);
+					//rs += instructions[i].split(" ")[1]+" "+instructions[i].split(" ")[2]+" ";
+					i++;
+				}
+				operatorSt.pop();
+				if (operatorSt.isEmpty()){
+					intermediate_code.add("LOAD "+ var +" " + operandSt.peek());
+				}
+				else {
+					boolean flag = true;
+					String op2 = "";
+					String op1 = "";
+					String operator ="";
+					while (operandSt.size()> 0 && operatorSt.size()>0 ){
+						if (flag){
+						 op2 = operandSt.pop();
+						 op1 = operandSt.pop();
+						 operator =  operatorSt.pop();
+						 flag = false;
+						}
+						else {
+							op2 = "ACCM";
+							op1 = operandSt.pop();
+							operator =  operatorSt.pop();
+						}
+						intermediate_code.add(symbols.get(operator) + " " + op1 + " " + op2);
+					}
+				
+				intermediate_code.add("LOAD "+ var + " ACCM");
+				}
+				i--;
+			}
+			else if (instructions[i].split(" ").length > 1 &&
+					 instructions[i].trim().split(" ")[0].equals("exit_skip")){
+				intermediate_code.add(instructions[i].trim().split(" ")[1] );
+			}
 
 }
 	}
