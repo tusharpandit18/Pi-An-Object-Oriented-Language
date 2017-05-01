@@ -2,22 +2,22 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-
-public class Executer {
-	// Class to read in line input and generate parse tree
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+public class Executer 
+{
 	static String parse_tree = "";
 	static ArrayList<String> intermediate_code = new ArrayList<String>();
 	
+	//static HashMap<String,String[]> symbol_table = new HashMap<String,String[]>(); 
     public static void main( String[] args) throws Exception 
     {
     	
     	//String fileName = "Fibonacci.txt";
-    	//Scanner sc = new Scanner(System.in);
-    	//String filename = sc.next();
+//    	Scanner sc = new Scanner(System.in);
+//    	String filename = sc.next();
     	String filename = "";
     	if (args.length > 0){
     		filename = args[0];
@@ -32,7 +32,7 @@ public class Executer {
         catch (IOException e){
         	
         }
-       // sc.close();
+       //sc.close();
         //ANTLRInputStream input = new ANTLRInputStream( System.in);
         ANTLRInputStream input = new ANTLRInputStream(fis);
 
@@ -56,8 +56,8 @@ public class Executer {
         	int_code_array[i] = intermediate_code.get(i);
         }
         
-        //RunTime rt = new RunTime();
-        //  System.out.println(" ***** Output******");
-       // rt.run_code(int_code_array);
+//        Runtime rt = new Runtime();
+//          System.out.println(" ***** Output******");
+//        rt.run_code(int_code_array);
     }
 }
