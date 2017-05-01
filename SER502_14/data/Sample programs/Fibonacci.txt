@@ -1,0 +1,14 @@
+number prev = 0.
+number next = 1.
+number count = 3.
+number temp = 0.
+number n = 20.
+print prev.
+print next.
+while count LT n:
+	temp = prev.
+	prev = next.
+	next = prev + temp.
+	print next.
+	count = count + 1.
+endwhile.

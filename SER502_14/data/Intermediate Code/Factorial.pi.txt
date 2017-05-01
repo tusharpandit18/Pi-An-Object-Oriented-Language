@@ -1,0 +1,12 @@
+DECL NMBR n
+LOAD n 5
+DECL NMBR mult
+LOAD mult 1
+LOOP GT n 0
+MULX mult n
+LOAD mult ACCM
+SUBX n 1
+LOAD n ACCM
+EDLP
+PRNT LINE "factorial is"
+PRNT VARX mult

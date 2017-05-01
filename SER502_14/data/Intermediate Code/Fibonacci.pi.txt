@@ -1,0 +1,21 @@
+DECL NMBR prev
+LOAD prev 0
+DECL NMBR next
+LOAD next 1
+DECL NMBR count
+LOAD count 3
+DECL NMBR temp
+LOAD temp 0
+DECL NMBR n
+LOAD n 20
+PRNT VARX prev
+PRNT VARX next
+LOOP LT count n
+LOAD temp prev
+LOAD prev next
+ADDX prev temp
+LOAD next ACCM
+PRNT VARX next
+ADDX count 1
+LOAD count ACCM
+EDLP

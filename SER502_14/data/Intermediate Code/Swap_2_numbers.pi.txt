@@ -1,0 +1,14 @@
+DECL NMBR a
+LOAD a 4
+DECL NMBR b
+LOAD b 6
+PRNT LINE "Before Swapping"
+PRNT VARX a
+PRNT VARX b
+DECL NMBR temp
+LOAD temp a
+LOAD a b
+LOAD b temp
+PRNT LINE "After swapping"
+PRNT VARX a
+PRNT VARX b

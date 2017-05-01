@@ -1,0 +1,13 @@
+DECL NMBR n
+LOAD n 5
+DECL NMBR count
+LOAD count 1
+DECL NMBR entry
+LOAD entry 0
+LOOP LT count 11
+MULX n count
+LOAD entry ACCM
+PRNT VARX entry
+ADDX count 1
+LOAD count ACCM
+EDLP

@@ -1,0 +1,14 @@
+number a = 4.
+number b = 6.
+
+print "Before Swapping".
+print a.
+print b.
+
+number temp = a.
+a = b.
+b = temp.
+
+print "After swapping".
+print a.
+print b.

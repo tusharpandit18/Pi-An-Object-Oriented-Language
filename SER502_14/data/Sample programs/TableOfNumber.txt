@@ -1,0 +1,8 @@
+number n = 5.
+number count = 1.
+number entry = 0.
+while count LT 11:
+entry = n * count.
+print entry.
+count = count + 1.
+endwhile.
