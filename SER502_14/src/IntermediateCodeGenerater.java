@@ -19,7 +19,7 @@ public class IntermediateCodeGenerater {
 	// array : index-0 - type, index-1 - value, index -3 attribute
 	// value will be assigned in runtime
 
-	
+
 	for (String i:instructions){
 		System.out.println(i);
 	}
@@ -143,48 +143,50 @@ public class IntermediateCodeGenerater {
 
 				// print variable
 				if (print[0].trim().equals("print_var")){
-					intermediate_code.add(print[1] + "_var " + print[2]);
+					intermediate_code.add("PRNT VARX " + print[2]);
 				}
 				// print a statement
 				else if (print[0].trim().equals("print_num")){
-					intermediate_code.add(print[1] + "_num " + print[2]);
+					intermediate_code.add("PRNT NMBR " + print[2]);
 				}
 				else if (print[0].trim().equals("print_line")){
 					String []line = instructions[i].split("\"");
 					String quote_to_print = "\"" + line[1]+ "\"";
 
-					intermediate_code.add(print[1] + "_line " +  quote_to_print);
+					intermediate_code.add("PRNT LINE " +  quote_to_print);
 				}
 
 			}
 			else if (instructions[i].trim().split(" ")[0].equals("if_statement")){
 
-				String keyword_if = instructions[i].trim().split(" ")[1];
+				String keyword_if = "IFST";
 				i++;
 				String []condition = instructions[i].split(" ");
-				intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
+
+				intermediate_code.add(keyword_if + " " + condition[2]+ " " + condition[1] + " " + condition[3]);
 			}
 			else if (instructions[i].trim().split(" ")[0].equals("else")){
-				intermediate_code.add("else");
+				intermediate_code.add("ELSE");
 			}
 			else if (instructions[i].trim().split(" ").length >  1 &&
 					(instructions[i].trim().split(" ")[1].equals("endif")||
 					 instructions[i].trim().split(" ")[0].equals("endif"))){
-				intermediate_code.add("endif");
+				intermediate_code.add("EDIF");
 			}
 			else if (instructions[i].trim().split(" ")[0].equals("loop_statement")){
 
-				String keyword_if = instructions[i].trim().split(" ")[1];
+				String keyword_loop = "LOOP";
 				i++;
 				String []condition = instructions[i].split(" ");
-				intermediate_code.add(keyword_if + " " + condition[1]+ " " + condition[2] + " " + condition[3]);
+				intermediate_code.add(keyword_loop + " " + condition[2]+ " " + condition[1] + " " + condition[3]);
 			}
 			else if (instructions[i].trim().split(" ").length >  1 &&
 					(instructions[i].trim().split(" ")[1].equals("endwhile")||
 					 instructions[i].trim().split(" ")[0].equals("endwhile"))){
 
-				intermediate_code.add("endwhile");
+				intermediate_code.add("EDLP");
 			}
+
 
 
 			else if (instructions[i].trim().equals("assignment")){
