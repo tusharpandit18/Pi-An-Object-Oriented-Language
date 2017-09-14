@@ -1,6 +1,3 @@
-# SER502--Spring2017-Team14
-Repository for SER502 Spring2017 project for team 14
-
 Video Link - https://youtu.be/lMHh9h0uE3o
 
 - The script is supported on MacOS/Linux
