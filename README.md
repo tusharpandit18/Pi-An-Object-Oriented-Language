@@ -1,4 +1,3 @@
-Video Link - https://youtu.be/lMHh9h0uE3o
 
 - The script is supported on MacOS/Linux
 
