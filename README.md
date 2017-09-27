@@ -1,3 +1,5 @@
+•	Developed a programming language using Java and Antlr.
+•	Defined Grammar rules using BNF to generate parse tree and developed compiler and runtime using Java. 
 
 - The script is supported on MacOS/Linux
 
